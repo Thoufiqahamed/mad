@@ -1,0 +1,201 @@
+package com.example.aishu_lab4;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    ImageView iv;
+    Button rect,circ,lin,squa,cls,exit;
+    Bitmap bitmap;
+    Canvas canvas;
+    Paint paint;
+    int sp=55;
+    Rect recta;
+    int CanvasRadius;
+    int CanvasPadding=7;
+    int height,width;
+
+
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        iv=findViewById(R.id.iv_s);
+        rect=findViewById(R.id.butt_rect);
+        circ=findViewById(R.id.butt_circle);
+        lin=findViewById(R.id.butt_line);
+        squa=findViewById(R.id.butt_square);
+        cls=findViewById(R.id.butt_reset);
+        exit=findViewById(R.id.butt_exit);
+    }
+
+    public void draw_Ai(View view)
+    {
+        bitmap=Bitmap.createBitmap(400,250,Bitmap.Config.RGB_565);
+        canvas=new Canvas(bitmap);
+        canvas.drawColor(Color.CYAN);
+        paint=new Paint();
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setColor(Color.BLUE);
+        paint.setAntiAlias(true);
+
+        if(view==rect)
+        {
+            recta=new Rect(55,55,350,200);
+            canvas.drawRect(recta,paint);
+            iv.setImageBitmap(bitmap);
+            Toast.makeText(this, "Rectangle Drawn", Toast.LENGTH_SHORT).show();
+        }
+        if(view==circ)
+        {
+            CanvasRadius=Math.min(canvas.getWidth()/2,canvas.getHeight()/2);
+            canvas.drawCircle(canvas.getWidth()/2,canvas.getHeight()/2,CanvasRadius-CanvasPadding,paint);
+            iv.setImageBitmap(bitmap);
+            Toast.makeText(this, "circle is drawn", Toast.LENGTH_SHORT).show();
+
+        }
+        if(view==lin)
+        {
+            canvas.drawLine(200,55,200,300,paint);
+            iv.setImageBitmap(bitmap);
+            Toast.makeText(this, "Straight line is drawn", Toast.LENGTH_SHORT).show();
+        }
+        if(view==squa)
+        {
+            recta=new Rect(55,55,200,200);
+            canvas.drawRect(recta,paint);
+            iv.setImageBitmap(bitmap);
+            Toast.makeText(this, "square is drawn", Toast.LENGTH_SHORT).show();
+        }
+        if(view==cls)
+        {
+            iv.setImageDrawable(null);
+        }
+        if(view==exit)
+        {
+            finish();
+        }
+    }
+
+}
+
+---------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E1D357"
+    android:backgroundTint="#E91E63"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iv_s"
+        android:layout_width="390dp"
+        android:layout_height="312dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.136"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/butt_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#16CDBC"
+        android:onClick="draw_Ai"
+        android:text="Circle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.69"
+        app:strokeColor="#C6B172" />
+
+    <Button
+        android:id="@+id/butt_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#73DFD5"
+        android:onClick="draw_Ai"
+        android:text="Line"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689" />
+
+    <Button
+        android:id="@+id/butt_square"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#81E3DA"
+        android:onClick="draw_Ai"
+        android:text="Square"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.902"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_s"
+        app:layout_constraintVertical_bias="0.302" />
+
+    <Button
+        android:id="@+id/butt_rect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="draw_Ai"
+        android:text="Rect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/butt_line"
+        app:layout_constraintVertical_bias="0.414" />
+
+    <Button
+        android:id="@+id/butt_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="draw_Ai"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.433"
+        app:layout_constraintStart_toStartOf="@+id/butt_rect"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.816" />
+
+    <Button
+        android:id="@+id/butt_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="draw_Ai"
+        android:text="exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.816" />
+</androidx.constraintlayout.widget.ConstraintLayout>

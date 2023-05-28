@@ -1,0 +1,255 @@
+package com.example.user_lab2;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    Spinner s1;
+    Button btn_con;
+    TextView textview;
+    String sl;
+    String[] dept;
+
+
+
+
+    @SuppressWarnings("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btn_con=findViewById(R.id.butt_1);
+        dept=getResources().getStringArray(R.array.department);
+        s1=findViewById(R.id.Spinner1);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line,dept);
+        s1.setAdapter(adapter);
+        s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int index=adapterView.getSelectedItemPosition();
+                if(index>0)
+                {
+                    Toast.makeText(MainActivity.this, "You have selected"+dept[index], Toast.LENGTH_SHORT).show();
+                    sl="you have selected "+dept[index];
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        btn_con.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textview=findViewById(R.id.tv3);
+                textview.setText(sl);
+                textview.setTypeface(null, Typeface.BOLD_ITALIC);
+            }
+        });
+    }
+}
+
+----------------------------------
+
+<resources>
+    <string name="app_name">user_lab2</string>
+    <string name="EV">Event Listner</string>
+    <string name="disp_name">SIT MCA</string>
+    <string name="dept">Department</string>
+    <string name="spinner_value">select the department</string>
+    <string name="butt_value">Convert to italic</string>
+    <string-array name="department">
+        <item>select your department</item>
+        <item>MCA</item>
+        <item>BE</item>
+        <item>Mtech</item>
+    </string-array>
+</resources>
+
+--------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spinner1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2A91E3"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="348dp"
+        android:layout_height="69dp"
+        android:background="#673AB7"
+        android:text="Event Listener"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="311dp"
+        android:layout_height="51dp"
+        android:background="#EA1C62"
+        android:hint="@string/disp_name"
+        android:text="SIT MCA"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <Button
+        android:id="@+id/butt_1"
+        android:layout_width="153dp"
+        android:layout_height="73dp"
+        android:hint="@string/spinner_value"
+        android:text="convert to italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <Spinner
+        android:id="@+id/Spinner1"
+        android:layout_width="347dp"
+        android:layout_height="70dp"
+        android:background="#C6ED99"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="305dp"
+        android:layout_height="77dp"
+        android:background="#AE1919"
+        android:hint="@string/dept"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.408" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="33dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout><?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spinner1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2A91E3"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="348dp"
+        android:layout_height="69dp"
+        android:background="#673AB7"
+        android:text="Event Listener"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="311dp"
+        android:layout_height="51dp"
+        android:background="#EA1C62"
+        android:hint="@string/disp_name"
+        android:text="SIT MCA"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <Button
+        android:id="@+id/butt_1"
+        android:layout_width="153dp"
+        android:layout_height="73dp"
+        android:hint="@string/spinner_value"
+        android:text="convert to italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <Spinner
+        android:id="@+id/Spinner1"
+        android:layout_width="347dp"
+        android:layout_height="70dp"
+        android:background="#C6ED99"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.633" />
+
+    <TextView
+        android:id="@+id/tv3"
+        android:layout_width="305dp"
+        android:layout_height="77dp"
+        android:background="#AE1919"
+        android:hint="@string/dept"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.408" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="33dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

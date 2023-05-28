@@ -1,0 +1,103 @@
+package com.example.ro1_lab1;
+
+import android.annotation.SuppressLint;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    ListView lv;
+    TextView tv;
+    String[] li;
+
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        li=getResources().getStringArray(R.array.li_contact);
+        lv=findViewById(R.id.c_listview);
+        tv=findViewById(R.id.pc);
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1,android.R.id.text1,li);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener((adapterView, view, i, l) -> {
+            String val=adapter.getItem(i);
+            tv.setText(val);
+            tv.setTypeface(null, Typeface.BOLD_ITALIC);
+        });
+
+    }
+
+}
+
+
+----------------------------------
+
+<resources>
+    <string name="app_name">user_lab1</string>
+    <string name="name">selected  phone contact will display here</string>
+    <string-array name="li_contact">
+        <item>Rohan 7986547698</item>
+        <item>Mohan 7986547696</item>
+        <item>Lohan 7986547697</item>
+        <item>Zohan 7986547695</item>
+        <item>Rohan 7986547698</item>
+        <item>Mohan 7986547696</item>
+        <item>Lohan 7986547697</item>
+        <item>Zohan 7986547695</item>
+        <item>Rohan 7986547698</item>
+        <item>Mohan 7986547696</item>
+        <item>Lohan 7986547697</item>
+        <item>Zohan 7986547695</item>
+    </string-array>
+</resources>
+
+
+---------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F06292"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/pc"
+        android:layout_width="334dp"
+        android:layout_height="81dp"
+        android:background="#673AB7"
+        android:hint="@string/name"
+        android:textAlignment="center"
+        android:textColorHint="#B39DDB"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.414"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.151" />
+
+    <ListView
+        android:id="@+id/c_listview"
+        android:layout_width="340dp"
+        android:layout_height="488dp"
+        android:layout_marginTop="36dp"
+        android:background="#FFEB3B"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pc"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

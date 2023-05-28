@@ -1,0 +1,283 @@
+package com.example.user_lab3;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+    public void add(View view)
+    {
+        float num1,num2,sum;
+        EditText t1=findViewById(R.id.editTextNumberDecimal);
+        EditText t2=findViewById(R.id.editTextNumberDecimal3);
+        TextView t3=findViewById(R.id.textView3);
+        if(t1.length()==0 || t2.length()==0)
+        {
+            Toast.makeText(this, "Enter the text value for num1 and num2 ", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            try {
+                num1=Float.parseFloat(t1.getText().toString());
+                num2=Float.parseFloat(t2.getText().toString());
+                sum=num1+num2;
+                t3.setText("Result="+Float.toString(sum));
+            }
+            catch (NumberFormatException e)
+            {
+                Toast.makeText(this, "Enter Number Only", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+
+
+    public void sub(View view)
+    {
+        float num1,num2,diff;
+        EditText t1=findViewById(R.id.editTextNumberDecimal);
+        EditText t2=findViewById(R.id.editTextNumberDecimal3);
+        TextView t3=findViewById(R.id.textView3);
+        if(t1.length()==0 || t2.length()==0)
+        {
+            Toast.makeText(this, "Enter the text value for num1 and num2 ", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            try {
+                num1=Float.parseFloat(t1.getText().toString());
+                num2=Float.parseFloat(t2.getText().toString());
+                diff=num1-num2;
+                t3.setText("Result="+Float.toString(diff));
+            }
+            catch (NumberFormatException e)
+            {
+                Toast.makeText(this, "Enter Number Only", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+
+    public void mul(View view)
+    {
+        float num1,num2,pro;
+        EditText t1=findViewById(R.id.editTextNumberDecimal);
+        EditText t2=findViewById(R.id.editTextNumberDecimal3);
+        TextView t3=findViewById(R.id.textView3);
+        if(t1.length()==0 || t2.length()==0)
+        {
+            Toast.makeText(this, "Enter the text value for num1 and num2 ", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            try {
+                num1=Float.parseFloat(t1.getText().toString());
+                num2=Float.parseFloat(t2.getText().toString());
+                pro=num1*num2;
+                t3.setText("Result="+Float.toString(pro));
+            }
+            catch (NumberFormatException e)
+            {
+                Toast.makeText(this, "Enter Number Only", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+    public void div(View view)
+    {
+        float num1,num2,quo;
+        EditText t1=findViewById(R.id.editTextNumberDecimal);
+        EditText t2=findViewById(R.id.editTextNumberDecimal3);
+        TextView t3=findViewById(R.id.textView3);
+        if(t1.length()==0 || t2.length()==0)
+        {
+            Toast.makeText(this, "Enter the text value for num1 and num2 ", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            try {
+                num1=Float.parseFloat(t1.getText().toString());
+                num2=Float.parseFloat(t2.getText().toString());
+                if(num2!=0) {
+                    quo = num1 / num2;
+                    t3.setText("Result=" + Float.toString(quo));
+                }
+                else {
+                    Toast.makeText(this, "Denominator should not be 0", Toast.LENGTH_SHORT).show();
+                }
+            }
+            catch (NumberFormatException e)
+            {
+                Toast.makeText(this, "Enter Number Only", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+
+
+    public void clear(View view) {
+
+        EditText t1 = findViewById(R.id.editTextNumberDecimal);
+        EditText t2 = findViewById(R.id.editTextNumberDecimal3);
+        TextView t3 = findViewById(R.id.textView3);
+        t1.setText("");
+        t2.setText("");
+        t3.setText("");
+    }
+}
+
+
+---------------------------------------------------------------------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/basicCalc"
+        android:layout_width="283dp"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:text="Basic Calculator"
+        android:textColor="#FF5722"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.063" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="329dp"
+        android:layout_height="116dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:textColor="#ED392C"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="add"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="sub"
+        android:text="Sub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="mul"
+        android:text="Mul"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="div"
+        android:text="Div"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.893" />
+
+    <Button
+        android:id="@+id/button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clear"
+        android:text="Clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.893" />
+
+    <EditText
+        android:id="@+id/editTextNumberDecimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Number 1"
+        android:inputType="numberDecimal"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.236" />
+
+    <EditText
+        android:id="@+id/editTextNumberDecimal3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter Number 2"
+        android:inputType="numberDecimal"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.371" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
